@@ -590,9 +590,6 @@ class CharModel:
                 file.write(char)
 
     def train(self, input_data, batches_folder, batch_size, sequence_length, num_epochs, learning_rate, decay_rate=1, decay_after=0, grad_clip=5, sample_size=0, sample_every=0, sample_seed=None, parallel_iterations=32, plot=False):
-        if isinstance(input_data, list):
-            for filepath in input_data:
-                self.train(filepath, batches_folder, batch_size, sequence_length, num_epochs, grad_clip, learning_rate, decay_rate, decay_after, sample_size, sample_every, sample_seed, parallel_iterations, plot)
         loader = CharLoader(input_data, batches_folder, self.vocab, self.encoding)
         sample_seed = [self.vocab[ch] for ch in list(sample_seed)]
         self.learner.train(loader, self.dir, batch_size, sequence_length, num_epochs, grad_clip, learning_rate, decay_rate, decay_after, sample_size, sample_every, sample_seed, parallel_iterations, plot)
@@ -642,9 +639,6 @@ class WordModel:
                 file.write(char)
 
     def train(self, input_data, batches_folder, batch_size, sequence_length, num_epochs, learning_rate, decay_rate=1, decay_after=0, grad_clip=5, sample_size=0, sample_every=0, sample_seed=None, parallel_iterations=32, plot=False):
-        if isinstance(input_data, list):
-            for filepath in input_data:
-                self.train(filepath, batches_folder, batch_size, sequence_length, num_epochs, grad_clip, learning_rate, decay_rate, decay_after, sample_size, sample_every, sample_seed, parallel_iterations, plot)
         loader = WordLoader(input_data, batches_folder, self.vocab, self.encoding)
         sample_seed = [self.vocab[ch] for ch in list(sample_seed)]
         self.learner.train(loader, self.dir, batch_size, sequence_length, num_epochs, grad_clip, learning_rate, decay_rate, decay_after, sample_size, sample_every, sample_seed, parallel_iterations, plot)
